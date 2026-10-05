@@ -5,8 +5,8 @@ Aplicación local-first para entender ingresos, gastos y hábitos financieros. E
 ## Ejecutar en local
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 Después, abre [http://localhost:3000](http://localhost:3000).
@@ -14,12 +14,11 @@ Después, abre [http://localhost:3000](http://localhost:3000).
 Comandos de calidad:
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm test
+npm run lint
+npm run typecheck
+npm test
 ```
 
-También puedes usar `npm install` y los comandos equivalentes si prefieres npm.
 
 ## Privacidad
 
