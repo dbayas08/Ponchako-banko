@@ -16,7 +16,7 @@ export function FinanceProvider({ children }: { children: React.ReactNode }) {
     addTransaction: (item) => setStore((s) => ({ ...s, transactions: [{ ...item, id: id() }, ...s.transactions] })),
     updateTransaction: (item) => setStore((s) => ({ ...s, transactions: s.transactions.map((current) => current.id === item.id ? item : current) })),
     deleteTransaction: (transactionId) => setStore((s) => ({ ...s, transactions: s.transactions.filter((item) => item.id !== transactionId) })),
-    addImported: (items) => { let added = 0; let duplicated = 0; setStore((s) => { const fresh = items.filter((item) => { const duplicate = isDuplicate(item as Transaction, s.transactions); if (duplicate) duplicated++; else added++; return !duplicate; }).map((item) => ({ ...item, id: id() })); return { ...s, transactions: [...fresh, ...s.transactions] }; }); return { added, duplicated }; },
+    addImported: (items) => { const duplicatedItems = items.filter((item) => isDuplicate(item as Transaction, store.transactions)); const fresh = items.filter((item) => !isDuplicate(item as Transaction, store.transactions)).map((item) => ({ ...item, id: id() })); setStore((s) => ({ ...s, transactions: [...fresh, ...s.transactions] })); return { added: fresh.length, duplicated: duplicatedItems.length }; },
     resetDemo: () => setStore({ transactions: initialTransactions, categories: initialCategories, budgets: initialBudgets }),
     addCategory: (item) => setStore((s) => ({ ...s, categories: [...s.categories, { ...item, id: id() }] })),
     updateCategory: (item) => setStore((s) => ({ ...s, categories: s.categories.map((current) => current.id === item.id ? item : current) })),
